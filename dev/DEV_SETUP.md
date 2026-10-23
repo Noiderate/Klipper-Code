@@ -8,22 +8,18 @@ Test against a simulated printer, never your real one.
 
 ## 1. Start the virtual printer
 
+Keep this outside the repo (or git-ignored), for example inside your project folder:
+
 ```bash
-cd dev/virtual-printer
+git clone https://github.com/mainsail-crew/virtual-klipper-printer
+cd virtual-klipper-printer
 docker compose up -d
 ```
 
 Moonraker is now on `http://localhost:7125`. Config files appear in
-`dev/virtual-printer/printer_data/config/` (git-ignored).
+`virtual-klipper-printer/printer_data/config/`.
 
-Allow the dev server through Moonraker's CORS by adding this under
-`[authorization]` in `printer_data/config/moonraker.conf`, then restart the container
-(`docker compose restart`):
-
-```ini
-cors_domains:
-    *://localhost:8080
-```
+If the printer stops with "Timer too close" on first boot, run `docker restart printer`.
 
 ## 2. Start the Klipper Code UI
 
@@ -48,4 +44,4 @@ npm run lint:fix
 npm run test:unit
 ```
 
-Commits follow Conventional Commits and are signed off (DCO); PRs target `develop`.
+Commits follow Conventional Commits and are signed off (DCO).
