@@ -36,6 +36,12 @@ npm run serve
 
 Open http://localhost:8080. Changes hot-reload.
 
+## 3. Turn on Klipper Code
+
+In Interface Settings (cog icon) open the **Klipper Code** tab, switch on **Enable Klipper Code** and
+connect any API key. Connecting is simulated for now and the chat runs in demo mode, so no real key is
+needed. The Klipper Code button then appears in the top bar next to the notifications bell.
+
 ## Before committing
 
 ```bash
