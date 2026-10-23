@@ -5,6 +5,9 @@
             persistent
             fullscreen
             hide-overlay
+            :content-class="klipperCodeOpen ? 'klipper-code-open' : ''"
+            :retain-focus="!klipperCodeOpen"
+            :no-click-animation="klipperCodeOpen"
             :transition="false"
             @close="close"
             @keydown.esc="escClose"
@@ -47,6 +50,15 @@
                         @click="save(restartServiceName)">
                         <v-icon small class="mr-1">{{ mdiRestart }}</v-icon>
                         {{ $t('Editor.SaveRestart') }}
+                    </v-btn>
+                    <v-btn
+                        v-if="klipperCodeEnabled"
+                        icon
+                        tile
+                        :class="{ 'klipper-code-toggle--open': klipperCodeOpen }"
+                        :title="$t('KlipperCode.Title')"
+                        @click="toggleKlipperCode">
+                        <klipper-code-icon dense />
                     </v-btn>
                     <v-btn v-if="isWriteable && !markdownPreview" icon tile @click="save(null)">
                         <v-icon>{{ mdiContentSave }}</v-icon>
@@ -190,6 +202,8 @@ import {
     mdiFormatListCheckbox,
 } from '@mdi/js'
 import DevicesDialog from '@/components/dialogs/DevicesDialog.vue'
+import KlipperCodeIcon from '@/components/klipperCode/KlipperCodeIcon.vue'
+import { klipperCodeUi } from '@/plugins/klipperCode'
 import { ConfigFileSection } from '@/store/files/types'
 import type { EditorView } from '@codemirror/view'
 import { EditorPositionMemory } from '@/plugins/codemirror/EditorPositionMemory'
@@ -199,6 +213,7 @@ const editorPositions = new EditorPositionMemory()
 @Component({
     components: {
         DevicesDialog,
+        KlipperCodeIcon,
         Panel,
         CodemirrorAsync,
         MarkdownPreview: () => import('@/components/inputs/MarkdownPreview.vue'),
@@ -237,6 +252,14 @@ export default class TheEditor extends Mixins(BaseMixin) {
 
     get changedOutput() {
         return this.changed ? '*' : ''
+    }
+
+    get klipperCodeEnabled(): boolean {
+        return this.$store.state.gui.klipperCode?.enabled ?? false
+    }
+
+    get klipperCodeOpen(): boolean {
+        return this.klipperCodeEnabled && klipperCodeUi.drawerOpen
     }
 
     get show() {
@@ -430,6 +453,10 @@ export default class TheEditor extends Mixins(BaseMixin) {
 
     get existsFileStructure() {
         return this.configFileStructure.length > 0
+    }
+
+    toggleKlipperCode() {
+        klipperCodeUi.drawerOpen = !klipperCodeUi.drawerOpen
     }
 
     toggleFileStructure() {
@@ -627,5 +654,18 @@ html.theme--light ._structure-sidebar-key {
 
 ::v-deep .v-treeview-node__level + .v-treeview-node__level {
     width: 12px;
+}
+</style>
+
+<style>
+/* leave room on the right for the Klipper Code panel, which sits next to the editor instead of under it */
+@media screen and (min-width: 960px) {
+    .v-dialog--fullscreen.klipper-code-open {
+        width: calc(100% - var(--klipper-code-drawer-width, 420px));
+    }
+}
+
+.klipper-code-toggle--open {
+    color: var(--color-logo) !important;
 }
 </style>

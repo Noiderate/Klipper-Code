@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar app elevate-on-scroll :height="topbarHeight" class="topbar pa-0" clipped-left>
+        <v-app-bar app elevate-on-scroll :height="topbarHeight" class="topbar pa-0" clipped-left clipped-right>
             <v-app-bar-nav-icon tile @click.stop="naviDrawer = !naviDrawer" />
             <router-link to="/">
                 <inline-svg v-if="sidebarLogo && isSvgLogo" :src="sidebarLogo" :class="logoClasses" />
@@ -53,6 +53,7 @@
                 <v-icon class="mr-md-2">{{ mdiAlertOctagonOutline }}</v-icon>
                 <span class="d-none d-md-inline">{{ $t('App.TopBar.EmergencyStop') }}</span>
             </v-btn>
+            <the-klipper-code-button />
             <the-notification-menu />
             <the-settings-menu />
             <the-top-corner-menu />
@@ -86,6 +87,7 @@ import Panel from '@/components/ui/Panel.vue'
 import PrinterSelector from '@/components/ui/PrinterSelector.vue'
 import MainsailLogo from '@/components/ui/MainsailLogo.vue'
 import TheNotificationMenu from '@/components/notifications/TheNotificationMenu.vue'
+import TheKlipperCodeButton from '@/components/klipperCode/TheKlipperCodeButton.vue'
 import { topbarHeight } from '@/store/variables'
 import { mdiAlertOctagonOutline, mdiContentSave, mdiFileUpload, mdiClose, mdiCloseThick } from '@mdi/js'
 import EmergencyStopDialog from '@/components/dialogs/EmergencyStopDialog.vue'
@@ -111,6 +113,7 @@ type uploadSnackbar = {
         PrinterSelector,
         MainsailLogo,
         TheNotificationMenu,
+        TheKlipperCodeButton,
     },
 })
 export default class TheTopbar extends Mixins(BaseMixin, ThemeMixin) {

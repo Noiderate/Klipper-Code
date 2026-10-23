@@ -126,6 +126,14 @@ export const getDefaultState = (): GuiState => {
             tabSize: 2,
             fileStructureSidebar: true,
         },
+        klipperCode: {
+            enabled: false,
+            provider: 'anthropic',
+            model: '',
+            effort: 'medium',
+            autoAccept: 'never',
+            connections: [],
+        },
         gcodeViewer: {
             extruderColors: ['#E76F51FF', '#F4A261FF', '#E9C46AFF', '#2A9D8FFF', '#264653FF'],
             gridColor: '#B3B3B3',

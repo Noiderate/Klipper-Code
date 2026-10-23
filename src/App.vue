@@ -3,6 +3,7 @@
         <template v-if="socketIsConnected && guiIsReady">
             <the-sidebar />
             <the-topbar />
+            <the-klipper-code-drawer />
             <v-main id="content" :style="mainStyle">
                 <v-container id="page-container" fluid :class="containerClasses">
                     <router-view />
@@ -30,6 +31,7 @@ import TheSidebar from '@/components/TheSidebar.vue'
 import BaseMixin from '@/components/mixins/base'
 import ThemeMixin from './components/mixins/theme'
 import TheTopbar from '@/components/TheTopbar.vue'
+import TheKlipperCodeDrawer from '@/components/klipperCode/TheKlipperCodeDrawer.vue'
 import { Mixins, Watch } from 'vue-property-decorator'
 import TheUpdateDialog from '@/components/TheUpdateDialog.vue'
 import TheConnectingDialog from '@/components/TheConnectingDialog.vue'
@@ -55,6 +57,7 @@ import { AppRoute } from '@/routes'
         TheConnectingDialog,
         TheUpdateDialog,
         TheTopbar,
+        TheKlipperCodeDrawer,
         TheSidebar,
         TheFullscreenUpload,
         TheUploadSnackbar,

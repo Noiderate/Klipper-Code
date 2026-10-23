@@ -29,7 +29,8 @@
                             :key="index"
                             :href="'#' + tab.name"
                             class="justify-start">
-                            <v-icon left v-html="tab.icon"></v-icon>
+                            <klipper-code-icon v-if="tab.name === 'klipper-code'" class="mr-2" />
+                            <v-icon v-else left v-html="tab.icon"></v-icon>
                             {{ tab.title }}
                         </v-tab>
                     </v-tabs>
@@ -44,7 +45,8 @@
                                     :href="'#' + tab.name"
                                     class="justify-start"
                                     style="width: 200px">
-                                    <v-icon left v-html="tab.icon"></v-icon>
+                                    <klipper-code-icon v-if="tab.name === 'klipper-code'" class="mr-2" />
+                                    <v-icon v-else left v-html="tab.icon"></v-icon>
                                     <span class="text-truncate">{{ tab.title }}</span>
                                 </v-tab>
                             </v-tabs>
@@ -104,6 +106,9 @@ import {
 } from '@mdi/js'
 import SettingsMiscellaneousTab from '@/components/settings/SettingsMiscellaneousTab.vue'
 import SettingsHeightmapTab from '@/components/settings/SettingsHeightmapTab.vue'
+import SettingsKlipperCodeTab from '@/components/settings/SettingsKlipperCodeTab.vue'
+import { OPEN_SETTINGS_EVENT } from '@/plugins/klipperCode'
+import KlipperCodeIcon from '@/components/klipperCode/KlipperCodeIcon.vue'
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 
 @Component({
@@ -124,6 +129,8 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
         SettingsMiscellaneousTab,
         SettingsNavigationTab,
         SettingsHeightmapTab,
+        SettingsKlipperCodeTab,
+        KlipperCodeIcon,
     },
 })
 export default class TheSettingsMenu extends Mixins(BaseMixin) {
@@ -207,6 +214,12 @@ export default class TheSettingsMenu extends Mixins(BaseMixin) {
                 name: 'heightmap',
                 title: this.$t('Settings.HeightmapTab.Heightmap'),
             },
+            {
+                // drawn by KlipperCodeIcon in the template: the mark is stroke based, not an mdi path
+                icon: '',
+                name: 'klipper-code',
+                title: this.$t('Settings.KlipperCodeTab.KlipperCode'),
+            },
         ]
 
         if (this.moonrakerComponents.includes('timelapse')) {
@@ -234,6 +247,19 @@ export default class TheSettingsMenu extends Mixins(BaseMixin) {
     @Watch('activeTab')
     activeTabWatch() {
         this.scrollToTop()
+    }
+
+    mounted() {
+        this.$root.$on(OPEN_SETTINGS_EVENT, this.openTab)
+    }
+
+    beforeDestroy() {
+        this.$root.$off(OPEN_SETTINGS_EVENT, this.openTab)
+    }
+
+    openTab(tab: string) {
+        this.activeTab = tab
+        this.showSettings = true
     }
 
     scrollToTop() {

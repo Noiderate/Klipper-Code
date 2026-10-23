@@ -1,3 +1,5 @@
+import type { AutoAcceptLevel } from '@/plugins/klipperCode'
+import type { EffortLevel } from '@/plugins/klipperCodeModels'
 import { GuiMacrosState } from '@/store/gui/macros/types'
 import { GuiConsoleState } from '@/store/gui/console/types'
 import { GuiPresetsState } from '@/store/gui/presets/types'
@@ -52,6 +54,14 @@ export interface GuiState {
         klipperRestartMethod: 'FIRMWARE_RESTART' | 'RESTART'
         tabSize: number
         fileStructureSidebar: boolean
+    }
+    klipperCode: {
+        enabled: boolean
+        provider: KlipperCodeProvider
+        model: string
+        effort: EffortLevel
+        autoAccept: AutoAcceptLevel
+        connections: KlipperCodeConnection[]
     }
     gcodeViewer: {
         extruderColors: string[]
@@ -245,3 +255,12 @@ export interface GuiStateLayoutoption {
 }
 
 export type GuiStateUiSettingsDashboardFilesFilter = 'new' | 'failed' | 'completed'
+
+export type KlipperCodeProvider = 'anthropic' | 'openai' | 'custom'
+
+export interface KlipperCodeConnection {
+    provider: KlipperCodeProvider
+    // only the last characters of the key are kept so the UI can tell connections apart
+    keyHint: string
+    connectedAt: number
+}

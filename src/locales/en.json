@@ -476,6 +476,100 @@
         "Start": "Start",
         "StartPrint": "Start Job"
     },
+    "KlipperCode": {
+        "Apply": "Apply",
+        "ApplyAnyway": "Apply anyway",
+        "AutoAccept": {
+            "Descriptions": {
+                "high": "Apply every change automatically, including pins, temperatures and motion settings",
+                "low": "Apply comments, macros, display and LED changes automatically",
+                "medium": "Also apply speed, acceleration, retraction and tuning changes automatically",
+                "never": "Every change waits for you to click Apply"
+            },
+            "Levels": {
+                "high": "High",
+                "low": "Safe",
+                "medium": "Medium",
+                "never": "Never"
+            },
+            "RestartNote": "Restarting Klipper always asks first, at every level.",
+            "Short": {
+                "high": "Auto: High",
+                "low": "Auto: Safe",
+                "medium": "Auto: Medium",
+                "never": "Auto: Off"
+            },
+            "Title": "Auto-accept changes"
+        },
+        "AutoApplied": "Applied automatically to {filename} ({risk})",
+        "BackupAt": "Backup saved as {path}",
+        "Cancel": "Cancel",
+        "Clear": "Clear conversation",
+        "CloseChat": "Close chat",
+        "ConnectAgent": "Connect an agent",
+        "Demo": "Demo",
+        "Discard": "Discard",
+        "Effort": {
+            "Levels": {
+                "high": "High",
+                "low": "Low",
+                "max": "Max",
+                "medium": "Medium",
+                "minimal": "Minimal",
+                "none": "None",
+                "xhigh": "Extra high"
+            },
+            "Title": "Effort"
+        },
+        "Error": "Something went wrong while asking Klipper Code. Please try again.",
+        "HighRiskConfirm": "I understand this change could stop my printer from working",
+        "Intro": "Ask Klipper Code to explain, check or change your printer's config files. Every change is shown for review before anything is saved.",
+        "Model": {
+            "CustomPlaceholder": "Type a model ID",
+            "Default": "Default",
+            "LoadError": "Could not load the model list.",
+            "ProviderDefault": "Provider default",
+            "Refresh": "Reload model list",
+            "Retry": "Retry",
+            "Title": "Model",
+            "Use": "Use"
+        },
+        "NoAgentConnected": "No AI agent connected",
+        "NoAgentConnectedDescription": "Connect an AI agent to let Klipper Code help you read, check and edit your printer config files.",
+        "Overwrite": "Overwrite",
+        "Placeholder": "Ask about your printer config…",
+        "RestartKlipper": "Restart Klipper",
+        "RestartMessage": "Klipper will restart and reload its config files so the change takes effect.",
+        "RestartTitle": "Restart Klipper?",
+        "RestartWhilePrinting": "A print is running. Wait until it has finished before restarting.",
+        "Risk": {
+            "high": "High risk",
+            "low": "Low risk",
+            "medium": "Medium risk"
+        },
+        "Saved": "Saved {filename}",
+        "Saving": "Saving…",
+        "Status": {
+            "applied": "Applied",
+            "applying": "Saving…",
+            "discarded": "Discarded",
+            "failed": "Could not save the file. Nothing was changed.",
+            "pending": "Waiting for review",
+            "stale": "The file changed since this suggestion was made, so it was not applied. Ask again for an updated suggestion.",
+            "undoFailed": "Could not undo: the file was changed after Klipper Code saved it. The backup is still in klipper_code_backups.",
+            "undoing": "Restoring backup…",
+            "undone": "Undone"
+        },
+        "SuggestionCheck": "Check printer.cfg for mistakes",
+        "SuggestionExplain": "Explain my printer.cfg",
+        "SuggestionMacro": "Add a start print macro",
+        "Thinking": "Thinking…",
+        "Title": "Klipper Code",
+        "Undo": "Undo",
+        "Undone": "Restored {filename} from the backup",
+        "UnsavedEditorMessage": "{filename} is open in the editor with unsaved changes. Applying this change will replace them.",
+        "UnsavedEditorTitle": "Unsaved editor changes"
+    },
     "Machine": {
         "ConfigFilesPanel": {
             "AllFiles": "All",
@@ -1289,6 +1383,34 @@
             }
         },
         "InterfaceSettings": "Interface Settings",
+        "KlipperCodeTab": {
+            "ApiKey": "API Key",
+            "ApiKeyDescription": "Paste your {provider} API key and click Connect.",
+            "ApiKeyPlaceholder": "Paste API key",
+            "Connect": "Connect",
+            "ConnectedAt": "connected {date}",
+            "ConnectedToast": "Connected to {provider}",
+            "Connections": "Connected API Keys",
+            "ConnectionsDescription": "AI providers Klipper Code can currently use.",
+            "Disconnect": "Disconnect",
+            "DisconnectAll": "Disconnect all API keys",
+            "DisconnectAllDescription": "Remove every connected API key at once.",
+            "DisconnectedAllToast": "All API keys disconnected",
+            "Enable": "Enable Klipper Code",
+            "EnableDescription": "Turn on the Klipper Code AI assistant for editing your printer config files.",
+            "KeyEndingIn": "Key ending in …{hint}",
+            "KlipperCode": "Klipper Code",
+            "Model": "Model",
+            "ModelDescription": "Which model to use. Leave empty to use the provider's default.",
+            "ModelPlaceholder": "Provider default",
+            "NoConnections": "No API keys connected",
+            "Provider": "AI Provider",
+            "Providers": {
+                "anthropic": "Anthropic (Claude)",
+                "custom": "Custom (OpenAI-compatible)",
+                "openai": "OpenAI"
+            }
+        },
         "MacrosTab": {
             "Add": "add",
             "AddGroup": "add Group",
